@@ -1,0 +1,9 @@
+1. The base case is going to be set by how small we want it to go/length of the branches, the recursive case is when it has not run enough times and will continue to run. 
+
+
+2. It will need the branch length, the angle, and the depth. the branch length, as it will stop once the branches get to small. 
+
+
+3. 1. Write the recursion to create a base(trunk) and two equally sized branches on each side. 
+   2. define and implement angle rotation. make sure branch lengths decrease, and branches are drawn symmetrically
+   3.add functionality to adjust branch thickness based on length/depth of branches.
