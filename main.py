@@ -16,43 +16,55 @@ Virtual Desktop
 import turtle
 import random
 
-Max_angle = 30
-Min_angle = 10
+Max_angle = 40
+Min_angle = 15
 Angle = 30
-Start_length = 50
-Min_length= 5
+Start_length = 100
+Min_length= 10
 Reduction_length= 1.5
 Reduction_thickness= 1.5
+
 
 t = turtle.Turtle()
 t.speed(0)
 
 def draw_branches(length, thickness):
-  #random_angle_left = random.randint(Min_angle, Max_angle)
-  #random_angle_right = random.randint(Min_angle, Max_angle)
+  colors = ("tomato", "dark salmon", "red")
+  t.pencolor("brown")
+
+  random_angle_left = random.randint(Min_angle, Max_angle)
+  random_angle_right = random.randint(Min_angle, Max_angle)
   if length < Min_length:
-    return
-  #t.pensize(thickness)
-  '''if length > Start_length/2:
+    t.pensize(7)
+    t.pencolor(random.choice(colors))
+    t.forward(10)
+    t.backward(10)
     t.pencolor("brown")
-  else:
-    t.pencolor("green")'''
-  
+    # draw
+    # backtrack
+    # reset pensize
+    # reset pencolor
+    return
+  t.pensize(thickness)
   t.forward(length)
   
-  t.left(Angle)
+  t.left(random_angle_left)
   draw_branches(length / Reduction_length, thickness / Reduction_thickness)
   
-  #t.right(random_angle_left + random_angle_right)
-  t.right(Angle*2)
+  t.right(random_angle_left + random_angle_right)
+ 
   draw_branches(length / Reduction_length, thickness / Reduction_thickness)
-  t.left(Angle)
+  t.left(random_angle_right)
+  
   t.backward(length)
   
 
 def draw_tree():
+  t.penup()
   t.left(90)
-  draw_branches(Start_length, 10)
+  t.backward(Start_length)
+  t.pendown()
+  draw_branches(Start_length, 20)
 
 
 def main():
