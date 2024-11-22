@@ -18,7 +18,7 @@ import random
 
 Max_angle = 40
 Min_angle = 15
-Angle = 30
+
 Start_length = 100
 Min_length= 10
 Reduction_length= 1.5
@@ -26,43 +26,59 @@ Reduction_thickness= 1.5
 
 
 t = turtle.Turtle()
-t.speed(0)
+t.speed(6)
 
 def draw_branches(length, thickness):
-  colors = ("tomato", "dark salmon", "red")
+  colors = ("tomato", "dark salmon", "red", "orange", "peru", "wheat")
   t.pencolor("brown")
+  num_branch = random.randint(1,2)
+  
 
   random_angle_left = random.randint(Min_angle, Max_angle)
   random_angle_right = random.randint(Min_angle, Max_angle)
   if length < Min_length:
-    t.pensize(7)
+    t.pensize(10)
     t.pencolor(random.choice(colors))
-    t.forward(10)
-    t.backward(10)
+    t.forward(15)
+    t.backward(15)
     t.pencolor("brown")
-    # draw
-    # backtrack
-    # reset pensize
-    # reset pencolor
+    t.pensize(thickness)
     return
   t.pensize(thickness)
   t.forward(length)
+  if num_branch == 2:
+    t.left(random_angle_left)
+    draw_branches(length / Reduction_length, thickness / Reduction_thickness)
+
+    t.right(random_angle_left + random_angle_right)
+    draw_branches(length / Reduction_length, thickness / Reduction_thickness)
+    t.left(random_angle_right)
+
+    t.backward(length)
+
+  elif num_branch ==1:
+    side = random.randint(1,2)
+    if side == 1:
+      t.left(random_angle_left)
+      draw_branches(length / Reduction_length, thickness / Reduction_thickness)
+      t.right(random_angle_left)
+      t.backward(length)
+    else:
+      t.right(random_angle_right)
+      draw_branches(length / Reduction_length, thickness / Reduction_thickness)
+      t.left(random_angle_right)
+      t.backward(length)
+  else:
+    t.backward(length)
   
-  t.left(random_angle_left)
-  draw_branches(length / Reduction_length, thickness / Reduction_thickness)
-  
-  t.right(random_angle_left + random_angle_right)
- 
-  draw_branches(length / Reduction_length, thickness / Reduction_thickness)
-  t.left(random_angle_right)
-  
-  t.backward(length)
-  
+    
+
+
 
 def draw_tree():
   t.penup()
   t.left(90)
-  t.backward(Start_length)
+  t.backward(Start_length-30)
   t.pendown()
   draw_branches(Start_length, 20)
 
